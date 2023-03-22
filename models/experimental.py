@@ -78,8 +78,9 @@ def attempt_load(weights, device=None, inplace=True, fuse=True):
     model = Ensemble()
     for w in weights if isinstance(weights, list) else [weights]:
         ckpt = torch.load(attempt_download(w), map_location=device)
-        ckpt = (ckpt.get('ema') or ckpt['model']).float()  # FP32 model
-        model.append(ckpt.fuse().eval() if fuse else ckpt.eval())  # fused or un-fused model in eval mode
+        # ckpt = ckpt.get('ema').float()  #or ckpt['model']).float()  # FP32 model
+        # model.append(ckpt.fuse().eval() if fuse else ckpt.eval())  # fused or un-fused model in eval mode
+        model.append(ckpt['ema' if ckpt.get('ema') else 'model'].float().fuse().eval())  # FP32 model
 
     # Compatibility updates
     for m in model.modules():

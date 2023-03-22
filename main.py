@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--model-path', type=str, default="yolov5s.pt", help='Path to the model')
 parser.add_argument('--img-path', type=str, default='images/', help='input image path')
 parser.add_argument('--output-dir', type=str, default='outputs', help='output dir')
-parser.add_argument('--img-size', type=int, default=640, help="input image size")
+parser.add_argument('--img-size', type=int, default=608, help="input image size")
 parser.add_argument('--target-layer', type=str, default='model_23_cv3_act',
                     help='The layer hierarchical address to which gradcam will applied,'
                          ' the names should be separated by underline')
